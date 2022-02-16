@@ -81,6 +81,17 @@ def create_user():
     db.session.commit()
     return jsonify(request_body_user), 200
 
+## 8 DELETE TO BE FINISHED
+@app.route('/user/favorites/planet/<int:planet_id>', methods=['DELETE'])
+def delete_planet(planet_id):
+    planet = Planet.query.filter_by(planet_id=planet_id).first()
+    print("This is the planet to delete: ",planet_id)
+    db.session.delete(planet_id)
+    db.session.commit()
+    return jsonify(planet.serialize()), 200
+
+
+
 # this only runs if `$ python src/main.py` is executed
 if __name__ == '__main__':
     PORT = int(os.environ.get('PORT', 3000))
