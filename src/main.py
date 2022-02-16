@@ -8,7 +8,7 @@ from flask_swagger import swagger
 from flask_cors import CORS
 from utils import APIException, generate_sitemap
 from admin import setup_admin
-from models import db, User
+from models import db, User, Planet, Character, FavoriteCharacter, FavoritePlanet
 #from models import Person
 
 app = Flask(__name__)
@@ -30,14 +30,56 @@ def handle_invalid_usage(error):
 def sitemap():
     return generate_sitemap(app)
 
+#GET ALL
 @app.route('/user', methods=['GET'])
 def handle_hello():
 
     username_query = User.query.all()
     all_users = list(map(lambda x: x.serialize(), username_query))
-
-
     return jsonify(all_users), 200
+
+
+@app.route('/planet', methods=['GET'])
+def get_planet():
+    planet_name_query = Planet.query.all()
+    all_planets = list(map(lambda x: x.serialize(), planet_name_query))
+    return jsonify(all_planets), 200
+
+@app.route('/character', methods=['GET'])
+def get_character():
+    characters = Character.query.all()
+    all_characters = list(map(lambda x: x.serialize(), characters))
+    return jsonify(all_characters), 200
+
+@app.route('/user/favorites', methods=['GET'])
+def get_userfavorites():
+    favoriteplanet = FavoritePlanet.query.all()
+    favoritecharacter = FavoriteCharacter.query.all()
+    all_favoritesC = list(map(lambda x: x.serialize(), favoriteplanet))
+    all_favoritesP = list(map(lambda x: x.serialize(), favoritecharacter))
+    return jsonify(all_favoritesC+all_favoritesP), 200
+
+#GET SINGLE
+@app.route('/planet/<int:planet_id>', methods=['GET'])
+def get_planetsing(planet_id):
+    planet = Planet.query.filter_by(planet_id=planet_id).first()
+    return jsonify(planet.serialize()), 200
+
+@app.route('/character/<int:character_id>', methods=['GET'])
+def get_charactersingle(character_id):
+    character = Character.query.filter_by(character_id=character_id).first()
+    return jsonify(character.serialize()), 200
+
+
+##POST    
+
+@app.route('/user', methods = ['POST'])
+def create_user():
+    request_body_user = request.get_json()
+    new_user = User(username=request_body_user["username"], password=request_body_user["password"])
+    db.session.add(new_user)
+    db.session.commit()
+    return jsonify(request_body_user), 200
 
 # this only runs if `$ python src/main.py` is executed
 if __name__ == '__main__':
