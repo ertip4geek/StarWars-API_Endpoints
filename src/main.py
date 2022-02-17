@@ -82,13 +82,13 @@ def create_user():
     return jsonify(request_body_user), 200
 
 ## 8 DELETE TO BE FINISHED
-@app.route('/user/favorites/planet/<int:planet_id>', methods=['DELETE'])
-def delete_planet(planet_id):
-    planet = Planet.query.filter_by(planet_id=planet_id).first()
-    print("This is the planet to delete: ",planet_id)
-    db.session.delete(planet_id)
+@app.route('/user/favorites/planet/<int:id>', methods=['DELETE'])
+def delete_planet(id):
+    remove_planet = FavoritePlanet.query.filter_by(id=id).first()
+    print("This is the planet to delete: ", id)
+    db.session.delete(remove_planet)
     db.session.commit()
-    return jsonify(planet.serialize()), 200
+    return jsonify(remove_planet.serialize()), 200
 
 
 
