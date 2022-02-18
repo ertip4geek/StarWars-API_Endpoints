@@ -93,9 +93,10 @@ class FavoritePlanet(db.Model):
         return '<FavoritePlanet %r>' % self.user_id
 
     def serialize(self):
+        user = User.query.get(self.user_id)
         return {
             "id": self.id,
-            "user_id": self.user_id,
+            "user": user.username,
             "planet_id": self.planet_id,
         }
 
