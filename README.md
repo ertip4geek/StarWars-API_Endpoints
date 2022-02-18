@@ -1,11 +1,11 @@
-# Flask Boilerplate for Profesional Development
+# StarWars API result
 
-[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/from-referrer/)
-<p align="center">
-    <a href="https://youtu.be/ORxQ-K3BzQA"><img height="200px" src="https://github.com/4GeeksAcademy/flask-rest-hello/blob/main/docs/assets/how-to.png?raw=true?raw=true" /></a>
-</p>
+![Fav_planet](https://user-images.githubusercontent.com/92811902/154602321-a2822d48-b60d-4cff-bdb0-a611666e3bdc.PNG)
 
-## Features
+
+
+## Features![planet_table](https://user-images.githubusercontent.com/92811902/154602338-0fdafb49-729e-4c10-b6ec-cbef78500a2a.PNG)
+
 
 - Extensive documentation [here](https://github.com/4GeeksAcademy/flask-rest-hello/tree/master/docs).
 - Integrated with Pipenv for package managing.
